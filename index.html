@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Desafio PmWeb</title>
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <!-- Cabeçalho -->
+    <!-- Cabeçalho -->
+
+    <div id="app" class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Administração do sistema</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="featured">Adicionar nova justificativa</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Fim Cabeçalho -->
+        <!-- Fim Cabeçalho -->
+        <!-- Fim Cabeçalho -->
+
+        <!-- Parte 1 -->
+        <!-- Parte 1 -->
+        <!-- Parte 1 -->
+
+        <container class="card">
+            <h2>Adicionar uma nova justificativa</h2>
+            <h4 id="justify">Justificativa</h4>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Digite um motivo para fazer opt out"
+                    v-model="newArg.text" :maxlength="newArg.max">
+                <div class="d-flex align-items-end flex-column">
+                    <div id="maxChar" class="p-2" v-text="newArg.text.length + '/' + newArg.max +' caracteres'"></div>
+                </div>
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="checkbox" v-model="allowObs.checked"> {{ allowObs.text }}
+                </label>
+
+
+            </div>
+            <div class="d-flex align-items-end flex-column" id="div-save">
+                <button type="button" class="button" id="save" @click="addArg">Salvar alterações</button>
+            </div>
+
+        </container>
+
+        <!-- Parte 2 -->
+        <!-- Parte 2 -->
+        <!-- Parte 2 -->
+
+        <div class="card">
+            <div class="row">
+                <!-- Coluna 1 -->
+                <div class="col-6">
+                    <img id="logo" src="assets\logo.png" width="200px" alt="Logo Pmweb">
+                    <div id="spaced">
+                        <h2>Nós sentiremos sua falta 😥</h2>
+                    </div>
+                    <div id="spaced">
+                        <p>Lamentamos ver você indo embora.<br>
+                            Para que possamos <b>melhorar nossa comunicação</b>, gostaríamos<br>
+                            de <b>saber os motivos</b> que o levaram a tomar essa decisão.
+                        </p>
+                    </div>
+                    <div class="spaced">
+                        <p><b>O questionário é opcional.</b></p>
+                    </div>
+
+                </div>
+
+                <!-- Fim Coluna 1 -->
+
+                <!-- Coluna 2 -->
+
+                <div class="col-6">
+                    <h3>Por que você quer se descadastrar?</h3><br>
+
+
+                    <div v-for="motivo in motivos" v-bind:key="motivo.id">
+                        <input type="radio" name="motivo.arg" v-model="motivo.value">
+                        <label>{{motivo.arg}}</label>
+                    </div>
+
+
+
+
+
+                    <div v-if="allowObs.checked">
+                        <input type="radio" id="reason7" value="7">
+                        <label for="reason6"> Outro:</label><br><br>
+                        <input type="text" class="form-control" placeholder="Não gostei do layout"
+                            v-model="otherArg.text" :maxlength="newArg.max">
+                        <div id="maxChar" class="d-flex align-items-end flex-column">
+                            <div class="p-2" v-text="otherArg.text.length + '/' + newArg.max +' caracteres'"></div>
+                        </div>
+                    </div>
+
+                    <p id="descadastramento">O descadastramento será efetuado para o e-mail:
+                        <span style="color: #4569EF; text-decoration: underline;">nome.sobrenome@pmweb.com.br</span>
+                    </p>
+
+
+                    <div class="d-flex align-items-end flex-column" id="div-save">
+                        <button type="button" class="button" id="send">Descadastrar</button>
+                    </div>
+
+
+
+
+
+
+                    <!-- Fim Coluna 2 -->
+
+
+                </div>
+
+                <script src="node_modules/vue/dist/vue.min.js"></script>
+
+                <script>
+                    let app = new Vue({
+                        el: '#app',
+                        data: {
+                            otherArg: {
+                                text: ''
+                            },
+                            newArg: {
+                                max: 150,
+                                text: ''
+                            },
+                            allowObs: {
+                                text: 'Permitir que o usuário informe uma observação',
+                                checked: 'false',
+                            },
+                            motivos:
+                                [
+                                    { arg: 'A frequência dos e-mails é muito alta.', value: 1 },
+                                    { arg: 'A linguagem utilizada nas mensagens não me agrada.', value: 2 },
+                                    { arg: 'O conteúdo não me interessa.', value: 3 },
+                                    { arg: 'As mensagens são muito extensas.', value: 4 },
+                                    { arg: 'O aspecto visual das mensagens não me agrada.', value: 5 },
+                                    { arg: 'Não me lembro de me inscrever / Nunca me cadastrei.', value: 6 }
+                                ]
+                        },
+                        methods: {
+                            addArg() {
+                                this.motivos.push({
+                                    arg: this.newArg.text,
+                                    value: this.motivos.value = this.motivos.length + 1
+                                })
+
+                            }
+                        }
+
+                    })
+                </script>
+</body>
+
+</html>

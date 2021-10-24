@@ -1,0 +1,27 @@
+{
+  "name": "yes",
+  "version": "1.0.0",
+  "description": "VueJS",
+  "author": "y",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test": "vuejs"
+  },
+  "main": "vuejs",
+  "dependencies": {
+    "vue": "^2.6.14"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "~4.5.14",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "keywords": [
+    "y"
+  ],
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "yes"
+  }
+}
